@@ -13,7 +13,7 @@ int main()
     int j = 0;
     int temp = 0;
     string str;
-    
+    /*
     cout << "Input the number stacks followed by the boxes: ";
     getline (cin, str);
     if (isdigit(str[0]) && str[1] == ' '){
@@ -38,4 +38,5 @@ int main()
         return 0;
         
     }
+*/
 }
