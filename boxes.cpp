@@ -23,6 +23,7 @@ int main()
     
     string str;
     string boxStr;
+    string tempStr;
     
     list<int> permuList;
     
@@ -60,11 +61,23 @@ int main()
         
         do {
             //cout << boxStr[0] << boxStr[1] << boxStr[2] << endl;
-            cout << boxStr << endl;/*
-            for (i = boxStr.length() ; i  < boxStr - 1; i++){
+            //cout << boxStr << endl;
+            temp = 0;
+            for (i = 0; (unsigned)i  < boxStr.length() + 0; i++){
+                //j = 0;
+                temp = 0;
+                tempStr = boxStr.substr(0, i);
+                for (j = 0; j < i; j++){
+                    temp = temp + (tempStr[j] - '0');
+                   // cout << "Temp = " << temp << endl;
+                }
+                
+                if (temp == stackSize){
+                    cout << "Found a possible stack : " << tempStr << endl;
+                }
                       
             }
-            */
+            
         } while (next_permutation(boxStr.begin(), boxStr.end()));
         
 
