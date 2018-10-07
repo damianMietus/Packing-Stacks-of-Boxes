@@ -9,7 +9,21 @@ using namespace std;
 
 void displayArray(int array[], int arraySize);
 void failure();
+STACK initializeStack
 
+struct STACK {
+    string str;
+    int zero;
+    int one;
+    int two;
+    int three;
+    int four;
+    int five;
+    int six;
+    int seven;
+    int eight;
+    int nine;
+} Stack;
 
 int main()
 {
@@ -31,11 +45,13 @@ int main()
     cout << "Input the number stacks followed by the boxes: " << endl;
     getline (cin, str);
     
+    // Check if it is valid input
     if (isdigit(str[0]) && str[1] == ' '){
         
         int arLen = str.length() - 2;
         int boxAr[arLen];
         numOfStacks = str[0] - '0';
+        // Turn the user inputted string into a sum
         for (i = 2; (unsigned)i < 0 + str.length(); i++){
  
             temp = str[i] - '0';
@@ -58,7 +74,10 @@ int main()
         cout << boxStr << endl;
         
         string tempStr;
-        
+        STACK stackArray[stackSize*10];
+        int numbOfStacks = 0;
+        bool firstflag = true;
+        // Get the permutations of the string to find possible stacks
         do {
             //cout << boxStr[0] << boxStr[1] << boxStr[2] << endl;
             //cout << boxStr << endl;
@@ -74,6 +93,11 @@ int main()
                 
                 if (temp == stackSize){
                     cout << "Found a possible stack : " << tempStr << endl;
+                    if (firstFlag == true){
+                        //add to list
+                        stackArray
+                        firstFlag = false;    
+                    }
                 }
                       
             }
