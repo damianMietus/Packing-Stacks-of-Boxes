@@ -9,7 +9,7 @@ using namespace std;
 
 void displayArray(int array[], int arraySize);
 void failure();
-STACK initializeStack
+//STACK initializeStack
 
 struct STACK {
     string str;
@@ -38,6 +38,8 @@ int main()
     string str;
     string boxStr;
     string tempStr;
+    
+    bool firstFlag = true;
     
     list<int> permuList;
     
@@ -76,7 +78,7 @@ int main()
         string tempStr;
         STACK stackArray[stackSize*10];
         int numbOfStacks = 0;
-        bool firstflag = true;
+        
         // Get the permutations of the string to find possible stacks
         do {
             //cout << boxStr[0] << boxStr[1] << boxStr[2] << endl;
@@ -84,8 +86,10 @@ int main()
             temp = 0;
             for (i = 0; (unsigned)i  < boxStr.length() + 0; i++){
                 //j = 0;
+                cout << boxStr << endl;
                 temp = 0;
                 tempStr = boxStr.substr(0, i);
+                
                 for (j = 0; j < i; j++){
                     temp = temp + (tempStr[j] - '0');
                    // cout << "Temp = " << temp << endl;
@@ -95,7 +99,7 @@ int main()
                     cout << "Found a possible stack : " << tempStr << endl;
                     if (firstFlag == true){
                         //add to list
-                        stackArray
+                        //stackArray
                         firstFlag = false;    
                     }
                 }
