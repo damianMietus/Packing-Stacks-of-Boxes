@@ -7,11 +7,7 @@
 
 using namespace std;
 
-void displayArray(int array[], int arraySize);
-void failure();
-//STACK initializeStack
-
-struct STACK {
+typedef struct STACK {
     string str;
     int zero;
     int one;
@@ -24,6 +20,13 @@ struct STACK {
     int eight;
     int nine;
 } Stack;
+
+void displayArray(int array[], int arraySize);
+void failure();
+Stack* addToStack(Stack stacks[], string str);
+Stack addNumbersToStack(Stack stack);
+
+
 
 int main()
 {
@@ -39,7 +42,7 @@ int main()
     string boxStr;
     string tempStr;
     
-    bool firstFlag = true;
+   // bool firstFlag = true;
     
     list<int> permuList;
     
@@ -76,7 +79,7 @@ int main()
         cout << boxStr << endl;
         
         string tempStr;
-        STACK stackArray[stackSize*10];
+        Stack stackArray[stackSize*10];
         int numbOfStacks = 0;
         
         // Get the permutations of the string to find possible stacks
@@ -86,7 +89,7 @@ int main()
             temp = 0;
             for (i = 0; (unsigned)i  < boxStr.length() + 0; i++){
                 //j = 0;
-                cout << boxStr << endl;
+                //cout << boxStr << endl;
                 temp = 0;
                 tempStr = boxStr.substr(0, i);
                 
@@ -97,11 +100,10 @@ int main()
                 
                 if (temp == stackSize){
                     cout << "Found a possible stack : " << tempStr << endl;
-                    if (firstFlag == true){
-                        //add to list
-                        //stackArray
-                        firstFlag = false;    
-                    }
+                    
+                    //add to list
+                    //stackArray[numbOfStacks]
+                    
                 }
                       
             }
@@ -122,10 +124,28 @@ void displayArray(int array[], int arraySize){
     for (i = 0; i < arraySize; i++){
         cout << array[i] << ", ";
     }
-    
 }
 
 void failure(){
     cout << "Invalid input. Try re-running the program\n";
     exit (EXIT_FAILURE);
 }
+
+Stack* addToStack(Stack stacks[], string str){
+
+    Stack temp;
+    temp.str = str;
+    
+    if (stacks == 0){
+        
+    }
+
+    return stacks;
+
+}
+/*
+Stack addNumbersToStack(Stack stack){
+
+
+
+}*/
