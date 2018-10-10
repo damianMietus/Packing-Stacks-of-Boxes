@@ -19,13 +19,14 @@ typedef struct STACK {
     int seven;
     int eight;
     int nine;
+    bool increment;
 } Stack;
 
 void displayArray(int array[], int arraySize);
 void failure();
-Stack* addToStack(Stack stacks[], string str);
-Stack addNumbersToStack(Stack stack);
-
+Stack* addToStack(Stack stacks[], string str, int indexToAdd);
+Stack addNumberToStack(Stack stack, string number);
+bool checkStackForDuplicate(Stack stack[], Stack temp, int end);
 
 
 int main()
@@ -79,7 +80,7 @@ int main()
         cout << boxStr << endl;
         
         string tempStr;
-        Stack stackArray[stackSize*10];
+        Stack* stackArray = malloc(sizeof(Stack)*(stackSize*10));
         int numbOfStacks = 0;
         
         // Get the permutations of the string to find possible stacks
@@ -99,10 +100,15 @@ int main()
                 }
                 
                 if (temp == stackSize){
-                    cout << "Found a possible stack : " << tempStr << endl;
+                    cout << "Found a stack : " << tempStr << endl;
                     
-                    //add to list
-                    //stackArray[numbOfStacks]
+                    //add to list]
+                    stackArray[numbOfStacks] = addToStack(stackArray, tempStr, numbOfStacks);
+                    //numbOfStacks++
+                    if (stackArray[0].increment == true){
+                        numbOfStacks++;
+                        cout << "Found a stack : " << tempStr << endl;
+                    }
                     
                 }
                       
@@ -131,21 +137,89 @@ void failure(){
     exit (EXIT_FAILURE);
 }
 
-Stack* addToStack(Stack stacks[], string str){
+Stack* addToStack(Stack stacks[], string str, int indexToAdd){
 
     Stack temp;
     temp.str = str;
+    temp = addNumberToStack(temp, str);
+    stacks[0].increment = false;
     
     if (stacks == 0){
+        stacks[indexToAdd] = temp;
+        stacks[0].increment = true;
+    } else {
         
+        if ( checkStackForDuplicate(stacks, temp, indexToAdd) == true){
+            // No duplicates
+            stacks[indexToAdd] = temp;
+            stacks[0].increment = true;
+        } else {
+            // already exists. Ignore this!
+            return stacks;
+        }
     }
 
     return stacks;
 
 }
+
+Stack addNumberToStack(Stack stack, string number){
+    int i = 0;
+    for (i = 0; i < number.length() ; i++){
+        if (number[i] == '0'){
+            stack.zero++;
+        } else if (number[i] == '1'){
+            stack.one++;
+        } else if (number[i] == '2'){
+            stack.two++;
+        } else if (number[i] == '3'){
+            stack.three++;
+        } else if (number[i] == '4'){
+            stack.four++;
+        } else if (number[i] == '5'){
+            stack.five++;
+        } else if (number[i] == '6'){
+            stack.six++;
+        } else if (number[i] == '7'){
+            stack.seven++;
+        } else if (number[i] == '8'){
+            stack.eight++;
+        } else if (number[i] == '9'){
+            stack.nine++;
+        } else {
+            exit (EXIT_FAILURE);
+        }
+    }
+    
+    return stack;
+}
 /*
-Stack addNumbersToStack(Stack stack){
-
-
-
-}*/
+typedef struct STACK {
+    string str;
+    int zero;
+    int one;
+    int two;
+    int three;
+    int four;
+    int five;
+    int six;
+    int seven;
+    int eight;
+    int nine;
+} Stack;
+*/
+bool checkStackForDuplicate(Stack stack[], Stack temp, int end){
+    int i = 0;
+    for (i = 0; i < end; i ++){
+        
+        if ( (stack[i].zero == temp.zero) && (stack[i].one == temp.one) 
+        && (stack[i].two == temp.two) && (stack[i].three == temp.three)
+        && (stack[i].four == temp.four) && (stack[i].five == temp.five)
+        && (stack[i].six == temp.six) && (stack[i].seven == temp.seven)
+        && (stack[i].eight == temp.eight) && (stack[i].nine == temp.nine) ){
+            return false;
+        }
+    
+    }
+    return true;
+}
