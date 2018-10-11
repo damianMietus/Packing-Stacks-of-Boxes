@@ -36,6 +36,7 @@ int main()
     int stackSize = 0;
     int i = 0;
     int j = 0;
+    int k = 0;
     int temp = 0;
     int sum = 0;
     
@@ -78,26 +79,35 @@ int main()
         displayArray(boxAr, arLen);
         
         boxStr = str.substr(2, str.length() - 2);
+        //Sort the string of boxes
+        sort(boxStr.begin(), boxStr.end());
+        
         cout << boxStr << endl;
         
         string tempStr;
         Stack stackArray[10 * numOfStacks];
         int numbOfStacks = 1;
         
+        
+        
+        
+        
         // Get the permutations of the string to find possible stacks
         do {
             //cout << boxStr[0] << boxStr[1] << boxStr[2] << endl;
-            //cout << boxStr << endl;
+            cout <<"This string is entering the for loop: "  <<boxStr << endl;
             temp = 0;
-            for (i = 0; (unsigned)i  < boxStr.length() + 0; i++){
+            for (i = 0; (unsigned)i  < boxStr.length() - 1; i++){
                 //j = 0;
                 //cout << boxStr << endl;
                 temp = 0;
+                //for (k = 0; k < boxStr.length() )
+                cout << "i = " << i << endl;
                 tempStr = boxStr.substr(0, i);
-                
+                cout << tempStr << endl;
                 for (j = 0; j < i; j++){
                     temp = temp + (tempStr[j] - '0');
-                   // cout << "Temp = " << temp << endl;
+                    //cout << "Temp = " << temp << endl;
                 }
                 
                 if (temp == stackSize){
@@ -160,7 +170,8 @@ int main()
                             && (stackArray[i].six == temp.six) && (stackArray[i].seven == temp.seven)
                             && (stackArray[i].eight == temp.eight) && (stackArray[i].nine == temp.nine) ){
                                 duplicateFlag = true;  
-                                //cout << "D'oh! It already exists! xD" << endl;
+                                cout << "D'oh! It already exists! xD" << endl;
+                                break;
                             }
     
                         }
