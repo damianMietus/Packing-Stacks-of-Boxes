@@ -28,9 +28,8 @@ typedef struct STACK {
 void displayArray(int array[], int arraySize);
 void displayStackArray(Stack array[], int arraySize);
 void failure();
-Stack* addToStack(Stack stacks[], string str, int indexToAdd);
-Stack addNumberToStack(Stack stack, string number);
-bool checkStackForDuplicate(Stack stack[], Stack temp, int end);
+Stack createStack (string str);
+Stack subtractStackVals(Stack s1, Stack s2);
 
 
 int main()
@@ -120,7 +119,8 @@ int main()
                     //add to list]
                    // stackArray[numbOfStacks] = addToStack(stackArray, tempStr, numbOfStacks);
                    
-                   Stack temp;
+                   Stack temp = createStack(tempStr);
+                   /*
                    temp.str = tempStr;
                    temp.zero = 0;
                    temp.one = 0;
@@ -158,6 +158,7 @@ int main()
                             exit (EXIT_FAILURE);
                         }
                     }
+                    */
                    
                     if (firstFlag == true){
                         stackArray[0] = temp;
@@ -194,6 +195,30 @@ int main()
             
         } while (next_permutation(boxStr.begin(), boxStr.end()));
         
+        
+        Stack inputStack = createStack(boxStr);
+        int oldNumbStacks = numbOfStacks;
+        //Begin looking for potential edge case doubles of stacks
+        for (i = 0; i < oldNumbStacks; i++){
+            Stack temp = stackArray[i];
+            Stack in = createStack(boxStr);
+            cout << "temp.str := "<< temp.str << endl;
+            cout << "temp.six := " << temp.six << endl;
+            cout << "in.six := " << in.six << endl;
+            while ( (temp.one < in.one) && (temp.two < in.two) && (temp.three < in.three) 
+                && (temp.four < in.four) && (temp.five < in.five) && (temp.six < in.six) 
+                && (temp.seven < in.seven) && (temp.eight < in.eight) && (temp.nine < in.nine)
+                ){
+                //subtract it
+                in = subtractStackVals(in, temp);
+                stackArray[numbOfStacks] = temp;
+                cout << "adding this := "<<temp.str << endl;
+                numbOfStacks++;
+                
+            }
+ 
+        }
+        
         displayStackArray(stackArray, numbOfStacks);
 
     } else {
@@ -223,79 +248,60 @@ void failure(){
     exit (EXIT_FAILURE);
 }
 
-/*
-
-Stack* addToStack(Stack stacks[], string str, int indexToAdd){
-
+Stack createStack (string str){
     Stack temp;
     temp.str = str;
-    temp = addNumberToStack(temp, str);
-    stacks[0].increment = false;
+    temp.zero = 0;
+    temp.one = 0;
+    temp.two = 0;
+    temp.three = 0;
+    temp.four = 0;
+    temp.five = 0;
+    temp.six = 0;
+    temp.seven = 0;
+    temp.eight = 0;
+    temp.nine = 0;
     
-    if (stacks == 0){
-        stacks[indexToAdd] = temp;
-        stacks[0].increment = true;
-    } else {
-        
-        if ( checkStackForDuplicate(stacks, temp, indexToAdd) == true){
-            // No duplicates
-            stacks[indexToAdd] = temp;
-            stacks[0].increment = true;
-        } else {
-            // already exists. Ignore this!
-            return stacks;
-        }
-    }
-
-    return stacks;
-
-}
-
-Stack addNumberToStack(Stack stack, string number){
     int i = 0;
-    for (i = 0; i < number.length() ; i++){
-        if (number[i] == '0'){
-            stack.zero++;
-        } else if (number[i] == '1'){
-            stack.one++;
-        } else if (number[i] == '2'){
-            stack.two++;
-        } else if (number[i] == '3'){
-            stack.three++;
-        } else if (number[i] == '4'){
-            stack.four++;
-        } else if (number[i] == '5'){
-            stack.five++;
-        } else if (number[i] == '6'){
-            stack.six++;
-        } else if (number[i] == '7'){
-            stack.seven++;
-        } else if (number[i] == '8'){
-            stack.eight++;
-        } else if (number[i] == '9'){
-            stack.nine++;
+    //Put numbers in this stack
+    for (i = 0; i < temp.str.length() ; i++){
+        if (temp.str[i] == '0'){
+            temp.zero++;
+        } else if (temp.str[i] == '1'){
+            temp.one++;
+        } else if (temp.str[i] == '2'){
+            temp.two++;
+        } else if (temp.str[i] == '3'){
+            temp.three++;
+        } else if (temp.str[i] == '4'){
+            temp.four++;
+        } else if (temp.str[i] == '5'){
+            temp.five++;
+        } else if (temp.str[i] == '6'){
+            temp.six++;
+        } else if (temp.str[i] == '7'){
+            temp.seven++;
+        } else if (temp.str[i] == '8'){
+            temp.eight++;
+        } else if (temp.str[i] == '9'){
+            temp.nine++;
         } else {
             exit (EXIT_FAILURE);
         }
     }
-    
-    return stack;
+    return temp;
 }
-
-bool checkStackForDuplicate(Stack stack[], Stack temp, int end){
-    int i = 0;
-    for (i = 0; i < end; i ++){
-        
-        if ( (stack[i].zero == temp.zero) && (stack[i].one == temp.one) 
-        && (stack[i].two == temp.two) && (stack[i].three == temp.three)
-        && (stack[i].four == temp.four) && (stack[i].five == temp.five)
-        && (stack[i].six == temp.six) && (stack[i].seven == temp.seven)
-        && (stack[i].eight == temp.eight) && (stack[i].nine == temp.nine) ){
-            return false;
-        }
+// s1 == in, s2 == temp
+Stack subtractStackVals(Stack s1, Stack s2){
+    s1.one = s1.one - s2.one;
+    s1.one = s1.two - s2.two;
+    s1.one = s1.three - s2.three;
+    s1.one = s1.four - s2.four;
+    s1.one = s1.five - s2.five;
+    s1.one = s1.six - s2.six;
+    s1.one = s1.seven - s2.seven;
+    s1.one = s1.eight - s2.eight;
+    s1.one = s1.nine - s2.nine;
     
-    }
-    return true;
+    return s1;
 }
-
-*/
