@@ -26,6 +26,7 @@ typedef struct STACK {
 } Stack;
 
 void displayArray(int array[], int arraySize);
+void displayStackArray(Stack array[], int arraySize);
 void failure();
 Stack* addToStack(Stack stacks[], string str, int indexToAdd);
 Stack addNumberToStack(Stack stack, string number);
@@ -98,16 +99,16 @@ int main()
         // Get the permutations of the string to find possible stacks
         do {
             //cout << boxStr[0] << boxStr[1] << boxStr[2] << endl;
-            cout <<"This string is entering the for loop: "  <<boxStr << endl;
+            //cout <<"This string is entering the for loop: "  <<boxStr << endl;
             temp = 0;
-            for (i = 0; (unsigned)i  < boxStr.length() - 1; i++){
+            for (i = 0; (unsigned)i  < boxStr.length() - 0; i++){
                 //j = 0;
                 //cout << boxStr << endl;
                 temp = 0;
                 //for (k = 0; k < boxStr.length() )
-                cout << "i = " << i << endl;
+                //cout << "i = " << i << endl;
                 tempStr = boxStr.substr(0, i);
-                cout << tempStr << endl;
+                //cout << tempStr << endl;
                 for (j = 0; j < i; j++){
                     temp = temp + (tempStr[j] - '0');
                     //cout << "Temp = " << temp << endl;
@@ -165,16 +166,17 @@ int main()
                     } else {
                         // check for duplicate stacks
                         duplicateFlag = false;
-                        for (i = 0; i < numbOfStacks+1; i ++){
+                        for (k = 0; k < numbOfStacks+1; k ++){
         
-                            if ( (stackArray[i].zero == temp.zero) && (stackArray[i].one == temp.one) 
-                            && (stackArray[i].two == temp.two) && (stackArray[i].three == temp.three)
-                            && (stackArray[i].four == temp.four) && (stackArray[i].five == temp.five)
-                            && (stackArray[i].six == temp.six) && (stackArray[i].seven == temp.seven)
-                            && (stackArray[i].eight == temp.eight) && (stackArray[i].nine == temp.nine) ){
+                            if ( (stackArray[k].zero == temp.zero) && (stackArray[k].one == temp.one) 
+                            && (stackArray[k].two == temp.two) && (stackArray[k].three == temp.three)
+                            && (stackArray[k].four == temp.four) && (stackArray[k].five == temp.five)
+                            && (stackArray[k].six == temp.six) && (stackArray[k].seven == temp.seven)
+                            && (stackArray[k].eight == temp.eight) && (stackArray[k].nine == temp.nine) ){
                                 duplicateFlag = true;  
-                                cout << "D'oh! It already exists! xD" << endl;
-                                break;
+                                //cout << "It exists." << endl;
+                                //i++;
+                                //break;
                             }
     
                         }
@@ -192,6 +194,7 @@ int main()
             
         } while (next_permutation(boxStr.begin(), boxStr.end()));
         
+        displayStackArray(stackArray, numbOfStacks);
 
     } else {
      
@@ -199,6 +202,13 @@ int main()
         
     }
 
+}
+
+void displayStackArray(Stack array[], int arraySize){
+    int i = 0;
+    for (i = 0; i < arraySize; i++){
+        cout << array[i].str << ", ";
+    }
 }
 
 void displayArray(int array[], int arraySize){
