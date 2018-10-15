@@ -1,3 +1,6 @@
+// Reddit Daily Programmer
+// Damian Mietus
+// Challenge #349 [Intermediate] Packing Stacks of Boxes
 #include <iostream>
 #include <string>
 #include <stdlib.h>
