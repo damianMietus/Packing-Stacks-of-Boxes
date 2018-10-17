@@ -198,26 +198,138 @@ int main()
         
         Stack inputStack = createStack(boxStr);
         int oldNumbStacks = numbOfStacks;
+        
+        Stack in = createStack(boxStr);
+        int tone = in.one;
+        int ttwo = in.two;
+        int tthr = in.three;
+        int tfou = in.four;
+        int tfiv = in.five;
+        int tsix = in.six;
+        int tsev = in.seven;
+        int teig = in.eight;
+        int tnin = in.nine;
+        //cout << "Here is the static in.six: = " << tsix << endl;
+        
         //Begin looking for potential edge case doubles of stacks
         for (i = 0; i < oldNumbStacks; i++){
             Stack temp = stackArray[i];
+            
             Stack in = createStack(boxStr);
-            cout << "temp.str := "<< temp.str << endl;
-            cout << "temp.six := " << temp.six << endl;
-            cout << "in.six := " << in.six << endl;
-            while ( (temp.one < in.one) && (temp.two < in.two) && (temp.three < in.three) 
-                && (temp.four < in.four) && (temp.five < in.five) && (temp.six < in.six) 
-                && (temp.seven < in.seven) && (temp.eight < in.eight) && (temp.nine < in.nine)
-                ){
+            int tone = in.one;
+            int ttwo = in.two;
+            int tthr = in.three;
+            int tfou = in.four;
+            int tfiv = in.five;
+            int tsix = in.six;
+            int tsev = in.seven;
+            int teig = in.eight;
+            int tnin = in.nine;
+            /*
+            cout <<"currently on " << i << endl;
+            cout << "Comparing 1s " << temp.one << " to " << tone << endl;
+            cout << "Comparing 2s " << temp.two << " to " << ttwo << endl;
+            cout << "Comparing 3s " << temp.three << " to " << tthr << endl;
+            cout << "Comparing 4s " << temp.four << " to " << tfou << endl;
+            cout << "Comparing 5s " << temp.five << " to " << tfiv << endl;
+            cout << "Comparing 6s " << temp.six << " to " << tsix << endl;
+            cout << "Comparing 7s " << temp.seven << " to " << tsev << endl;
+            cout << "Comparing 8s " << temp.eight << " to " << teig << endl;
+            cout << "Comparing 9s " << temp.nine << " to " << tnin << endl;
+            */
+		    while( (tone > 0) || (ttwo > 0) || (tthr > 0) 
+                    || (tfou > 0) || (tfiv > 0) || (tsix > 0) 
+                    || (tsev > 0) || (teig > 0) || (tnin > 0)
+            ){
                 //subtract it
-                in = subtractStackVals(in, temp);
-                stackArray[numbOfStacks] = temp;
-                cout << "adding this := "<<temp.str << endl;
-                numbOfStacks++;
+                //in = subtractStackVals(in, temp);
+                bool addFlag = true;
+                if (temp.one > 0){
+                    if (temp.one < tone){
+                        addFlag = true;    
+                    } else {
+                        break;
+                    }
+                } if (temp.two > 0){
+                    if (temp.two < ttwo){
+                        addFlag = true;    
+                    } else {
+                        break;
+                    }
+                } if (temp.three > 0){
+                    if (temp.three < tthr){
+                        addFlag = true;    
+                    } else {
+                        break;
+                    }
+                } if (temp.four > 0){
+                    if (temp.four < tfou){
+                        addFlag = true;    
+                    } else {
+                        break;
+                    }
+                } if (temp.five > 0){
+                    if (temp.five < tfiv){
+                        addFlag = true;    
+                    } else {
+                        break;
+                    }
+                } if (temp.six > 0){
+                    if (temp.six < tsix){
+                        addFlag = true;    
+                    } else {
+                        break;
+                    }
+                } if (temp.seven > 0){
+                    if (temp.seven < tsev){
+                        addFlag = true;    
+                    } else {
+                        break;
+                    }
+                } if (temp.eight > 0){
+                    if (temp.eight < teig){
+                        addFlag = true;    
+                    } else {
+                        break;
+                    }
+                } if (temp.nine > 0){
+                    if (temp.nine < tnin){
+                        addFlag = true;    
+                    } else {
+                        break;
+                    }
+                } 
+                
+                if (addFlag = true){
+                    tone = tone - (temp.one);
+                    ttwo = ttwo - (temp.two);
+                    tthr = tthr - (temp.three);
+                    tfou = tfou - (temp.four);
+                    tfiv = tfiv - (temp.five);
+                    tsix = tsix - (temp.six);
+                    tsev = tsev - (temp.seven);
+                    teig = teig - (temp.eight);
+                    tnin = tnin - (temp.nine);
+                    
+                    stackArray[numbOfStacks] = temp;
+                    cout << "adding this := "<<temp.str << endl;
+                    numbOfStacks++;                    
+                }
+                
+                
+
                 
             }
- 
+
         }
+        
+        //Begin the check to find legal stack combination
+        string indexStr;
+        for (i = 0; i < numbOfStacks; i++){
+            char c = char(i);
+            indexStr += c;
+        }
+        cout << indexStr << endl;
         
         displayStackArray(stackArray, numbOfStacks);
 
