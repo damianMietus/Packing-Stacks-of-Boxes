@@ -347,29 +347,42 @@ int main()
                 
                 //cout << addUp.one <<addUp.two << addUp.three << addUp.four << addUp.five << addUp.six << addUp.seven << addUp.eight << addUp.nine << endl; 
     
-
+                /*
+                cout << addUp.one <<addUp.two << addUp.three << addUp.four << addUp.five << addUp.six << addUp.seven << addUp.eight << addUp.nine << endl;
+                cout << "compare to" << endl;
+                cout << in.one <<in.two << in.three << in.four << in.five << in.six << in.seven << in.eight << in.nine << endl;
+                */
                 
                 if ((addUp.one == in.one) && (addUp.two == in.two) && (addUp.three == in.three) && 
                 (addUp.four == in.four) && (addUp.five == in.five) && (addUp.six == in.six) && 
                 (addUp.seven == in.seven) && (addUp.eight == in.eight) && (addUp.nine == in.nine)){
                     
-                    cout << addUp.one <<addUp.two << addUp.three << addUp.four << addUp.five << addUp.six << addUp.seven << addUp.eight << addUp.nine << endl;
-                    cout << "equals" << endl;
-                    cout << in.one <<in.two << in.three << in.four << in.five << in.six << in.seven << in.eight << in.nine << endl;
-                    endFlag = true;
-                    break;
+
+
+                    cout << "It is stackable: ";
+                    for (i = 0; i < strArSize; i++){
+                        if (i != strArSize-1){
+                            cout << strAr[i] << ", ";                              
+                        } else {
+                            cout << strAr[i] << endl; 
+                        }
+  
+                    }
+                    return(0);
+
                 }
                     
             }
-                      
+               
+            /*       
             if (endFlag = true) {
                 break;
             }
+            */
             
         } while (next_permutation(indexStr.begin(), indexStr.end()));
         
-        
-        
+        /*
         if (endFlag == true){
             cout << "It is stackable: ";
             for (i = 0; i < strArSize; i++){
@@ -378,8 +391,8 @@ int main()
         } else {
             failure();
         }
-        
-        
+        */
+        failure();
         
         
         //cout << "indexStr: "<< indexStr << endl;
