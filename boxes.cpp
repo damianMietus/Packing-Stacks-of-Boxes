@@ -5,6 +5,9 @@
 #include <string>
 #include <stdlib.h>
 #include <list>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sstream>
 
 #include <algorithm>    // std::next_permutation, std::sort
 
@@ -30,6 +33,7 @@ void displayStackArray(Stack array[], int arraySize);
 void failure();
 Stack createStack (string str);
 Stack subtractStackVals(Stack s1, Stack s2);
+Stack setToZero();
 
 
 int main()
@@ -77,15 +81,15 @@ int main()
         }
         
         stackSize = (sum / numOfStacks);
-        cout <<"The stacks must be size of : " << stackSize << "\n";
+        //cout <<"The stacks must be size of : " << stackSize << "\n";
         
-        displayArray(boxAr, arLen);
+        //displayArray(boxAr, arLen);
         
         boxStr = str.substr(2, str.length() - 2);
         //Sort the string of boxes
         sort(boxStr.begin(), boxStr.end());
         
-        cout << boxStr << endl;
+        //cout << boxStr << endl;
         
         string tempStr;
         Stack stackArray[10 * numOfStacks];
@@ -120,50 +124,12 @@ int main()
                    // stackArray[numbOfStacks] = addToStack(stackArray, tempStr, numbOfStacks);
                    
                    Stack temp = createStack(tempStr);
-                   /*
-                   temp.str = tempStr;
-                   temp.zero = 0;
-                   temp.one = 0;
-                   temp.two = 0;
-                   temp.three = 0;
-                   temp.four = 0;
-                   temp.five = 0;
-                   temp.six = 0;
-                   temp.seven = 0;
-                   temp.eight = 0;
-                   temp.nine = 0;
-                   //Put numbers in this stack
-                    for (i = 0; i < temp.str.length() ; i++){
-                        if (temp.str[i] == '0'){
-                            temp.zero++;
-                        } else if (temp.str[i] == '1'){
-                            temp.one++;
-                        } else if (temp.str[i] == '2'){
-                            temp.two++;
-                        } else if (temp.str[i] == '3'){
-                            temp.three++;
-                        } else if (temp.str[i] == '4'){
-                            temp.four++;
-                        } else if (temp.str[i] == '5'){
-                            temp.five++;
-                        } else if (temp.str[i] == '6'){
-                            temp.six++;
-                        } else if (temp.str[i] == '7'){
-                            temp.seven++;
-                        } else if (temp.str[i] == '8'){
-                            temp.eight++;
-                        } else if (temp.str[i] == '9'){
-                            temp.nine++;
-                        } else {
-                            exit (EXIT_FAILURE);
-                        }
-                    }
-                    */
+
                    
                     if (firstFlag == true){
                         stackArray[0] = temp;
                         firstFlag = false;
-                        cout << "The first one: " << stackArray[0].str << endl;
+                        //cout << "The first one: " << stackArray[0].str << endl;
                     } else {
                         // check for duplicate stacks
                         duplicateFlag = false;
@@ -183,7 +149,7 @@ int main()
                         }
                         if (duplicateFlag == false){
                             stackArray[numbOfStacks] = temp;
-                            cout << "String: " << stackArray[numbOfStacks].str << " put in this index: " << numbOfStacks << endl;
+                            //cout << "String: " << stackArray[numbOfStacks].str << " put in this index: " << numbOfStacks << endl;
                             numbOfStacks++;
                         } // else it already exists. Change nothing
                         
@@ -312,7 +278,7 @@ int main()
                     tnin = tnin - (temp.nine);
                     
                     stackArray[numbOfStacks] = temp;
-                    cout << "adding this := "<<temp.str << endl;
+                    //cout << "adding this := "<<temp.str << endl;
                     numbOfStacks++;                    
                 }
                 
@@ -324,14 +290,101 @@ int main()
         }
         
         //Begin the check to find legal stack combination
+    
+        //Make string to be permuted to  check for legal stack combination
         string indexStr;
+        j = 0;
+        stringstream ss;
         for (i = 0; i < numbOfStacks; i++){
-            char c = char(i);
-            indexStr += c;
+            ss << i;
+            indexStr = ss.str();
+            //cout << indexStr << endl;
+            j += 1;
         }
-        cout << indexStr << endl;
         
-        displayStackArray(stackArray, numbOfStacks);
+        
+        
+        
+       // cout << "it MUST equal: " << in.one <<in.two << in.three << in.four << in.five << in.six << in.seven << in.eight << in.nine << endl;
+        
+        string strAr[100];
+        int strArSize;
+        bool endFlag = false;
+        
+        
+        do {
+            endFlag = false;
+            for (i = 0; (unsigned)i  < indexStr.length() + 1; i++){
+
+
+                tempStr = indexStr.substr(0, i);
+                
+                //reset addUp stack
+                Stack addUp = setToZero();
+                //reset final output Array
+                for (k = 0; k < 100; k++){
+                    strAr[k] = "";
+                }
+
+
+                //add to addUp stack
+                for (j = 0; j < tempStr.length() + 1; j++){
+                    int indx = tempStr[j] - '0';
+                    
+                    addUp.one += stackArray[indx].one;
+                    addUp.two += stackArray[indx].two;
+                    addUp.three += stackArray[indx].three;
+                    addUp.four += stackArray[indx].four;
+                    addUp.five += stackArray[indx].five;
+                    addUp.six += stackArray[indx].six;
+                    addUp.seven += stackArray[indx].seven;
+                    addUp.eight += stackArray[indx].eight;
+                    addUp.nine += stackArray[indx].nine;
+                    strAr[j] = stackArray[indx].str;
+                    strArSize = j;
+                    
+                }
+                
+                //cout << addUp.one <<addUp.two << addUp.three << addUp.four << addUp.five << addUp.six << addUp.seven << addUp.eight << addUp.nine << endl; 
+    
+
+                
+                if ((addUp.one == in.one) && (addUp.two == in.two) && (addUp.three == in.three) && 
+                (addUp.four == in.four) && (addUp.five == in.five) && (addUp.six == in.six) && 
+                (addUp.seven == in.seven) && (addUp.eight == in.eight) && (addUp.nine == in.nine)){
+                    
+                    cout << addUp.one <<addUp.two << addUp.three << addUp.four << addUp.five << addUp.six << addUp.seven << addUp.eight << addUp.nine << endl;
+                    cout << "equals" << endl;
+                    cout << in.one <<in.two << in.three << in.four << in.five << in.six << in.seven << in.eight << in.nine << endl;
+                    endFlag = true;
+                    break;
+                }
+                    
+            }
+                      
+            if (endFlag = true) {
+                break;
+            }
+            
+        } while (next_permutation(indexStr.begin(), indexStr.end()));
+        
+        
+        
+        if (endFlag == true){
+            cout << "It is stackable: ";
+            for (i = 0; i < strArSize; i++){
+                cout << strAr[i] << ", ";    
+            }
+        } else {
+            failure();
+        }
+        
+        
+        
+        
+        //cout << "indexStr: "<< indexStr << endl;
+        
+       // displayStackArray(stackArray, numbOfStacks);
 
     } else {
      
@@ -351,7 +404,7 @@ void displayStackArray(Stack array[], int arraySize){
 void displayArray(int array[], int arraySize){
     int i = 0;
     for (i = 0; i < arraySize; i++){
-        cout << array[i] << ", ";
+        cout << ", " <<  array[i];
     }
 }
 
@@ -401,6 +454,22 @@ Stack createStack (string str){
             exit (EXIT_FAILURE);
         }
     }
+    return temp;
+}
+
+Stack setToZero(){
+    Stack temp;
+    temp.zero = 0;
+    temp.one = 0;
+    temp.two = 0;
+    temp.three = 0;
+    temp.four = 0;
+    temp.five = 0;
+    temp.six = 0;
+    temp.seven = 0;
+    temp.eight = 0;
+    temp.nine = 0;
+    
     return temp;
 }
 // s1 == in, s2 == temp
