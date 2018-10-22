@@ -8,7 +8,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sstream>
-
 #include <algorithm>    // std::next_permutation, std::sort
 
 using namespace std;
@@ -35,7 +34,6 @@ Stack createStack (string str);
 Stack subtractStackVals(Stack s1, Stack s2);
 Stack setToZero();
 
-
 int main()
 {
 
@@ -54,8 +52,7 @@ int main()
     bool duplicateFlag = true;
     bool firstFlag = true;
     
-    list<int> permuList;
-    
+    list<int> permuList;    
     
     cout << "Input the number stacks followed by the boxes: " << endl;
     getline (cin, str);
@@ -80,56 +77,33 @@ int main()
             failure();
         }
         
-        stackSize = (sum / numOfStacks);
-        //cout <<"The stacks must be size of : " << stackSize << "\n";
-        
-        //displayArray(boxAr, arLen);
-        
+        stackSize = (sum / numOfStacks);       
         boxStr = str.substr(2, str.length() - 2);
         //Sort the string of boxes
         sort(boxStr.begin(), boxStr.end());
-        
-        //cout << boxStr << endl;
-        
+
         string tempStr;
         Stack stackArray[10 * numOfStacks];
         int numbOfStacks = 1;
-        
-        
-        
-        
-        
+       
         // Get the permutations of the string to find possible stacks
         do {
-            //cout << boxStr[0] << boxStr[1] << boxStr[2] << endl;
-            //cout <<"This string is entering the for loop: "  <<boxStr << endl;
+
             temp = 0;
             for (i = 0; (unsigned)i  < boxStr.length() - 0; i++){
-                //j = 0;
-                //cout << boxStr << endl;
                 temp = 0;
-                //for (k = 0; k < boxStr.length() )
-                //cout << "i = " << i << endl;
                 tempStr = boxStr.substr(0, i);
-                //cout << tempStr << endl;
                 for (j = 0; j < i; j++){
                     temp = temp + (tempStr[j] - '0');
-                    //cout << "Temp = " << temp << endl;
                 }
                 
                 if (temp == stackSize){
-                    //cout << "Found a stack : " << tempStr << endl;
-                    
-                    //add to list]
-                   // stackArray[numbOfStacks] = addToStack(stackArray, tempStr, numbOfStacks);
                    
                    Stack temp = createStack(tempStr);
-
                    
                     if (firstFlag == true){
                         stackArray[0] = temp;
                         firstFlag = false;
-                        //cout << "The first one: " << stackArray[0].str << endl;
                     } else {
                         // check for duplicate stacks
                         duplicateFlag = false;
@@ -141,15 +115,11 @@ int main()
                             && (stackArray[k].six == temp.six) && (stackArray[k].seven == temp.seven)
                             && (stackArray[k].eight == temp.eight) && (stackArray[k].nine == temp.nine) ){
                                 duplicateFlag = true;  
-                                //cout << "It exists." << endl;
-                                //i++;
-                                //break;
                             }
     
                         }
                         if (duplicateFlag == false){
                             stackArray[numbOfStacks] = temp;
-                            //cout << "String: " << stackArray[numbOfStacks].str << " put in this index: " << numbOfStacks << endl;
                             numbOfStacks++;
                         } // else it already exists. Change nothing
                         
@@ -160,7 +130,6 @@ int main()
             }
             
         } while (next_permutation(boxStr.begin(), boxStr.end()));
-        
         
         Stack inputStack = createStack(boxStr);
         int oldNumbStacks = numbOfStacks;
@@ -175,7 +144,6 @@ int main()
         int tsev = in.seven;
         int teig = in.eight;
         int tnin = in.nine;
-        //cout << "Here is the static in.six: = " << tsix << endl;
         
         //Begin looking for potential edge case doubles of stacks
         for (i = 0; i < oldNumbStacks; i++){
@@ -191,24 +159,12 @@ int main()
             int tsev = in.seven;
             int teig = in.eight;
             int tnin = in.nine;
-            /*
-            cout <<"currently on " << i << endl;
-            cout << "Comparing 1s " << temp.one << " to " << tone << endl;
-            cout << "Comparing 2s " << temp.two << " to " << ttwo << endl;
-            cout << "Comparing 3s " << temp.three << " to " << tthr << endl;
-            cout << "Comparing 4s " << temp.four << " to " << tfou << endl;
-            cout << "Comparing 5s " << temp.five << " to " << tfiv << endl;
-            cout << "Comparing 6s " << temp.six << " to " << tsix << endl;
-            cout << "Comparing 7s " << temp.seven << " to " << tsev << endl;
-            cout << "Comparing 8s " << temp.eight << " to " << teig << endl;
-            cout << "Comparing 9s " << temp.nine << " to " << tnin << endl;
-            */
+
 		    while( (tone > 0) || (ttwo > 0) || (tthr > 0) 
                     || (tfou > 0) || (tfiv > 0) || (tsix > 0) 
                     || (tsev > 0) || (teig > 0) || (tnin > 0)
             ){
                 //subtract it
-                //in = subtractStackVals(in, temp);
                 bool addFlag = true;
                 if (temp.one > 0){
                     if (temp.one < tone){
@@ -278,13 +234,9 @@ int main()
                     tnin = tnin - (temp.nine);
                     
                     stackArray[numbOfStacks] = temp;
-                    //cout << "adding this := "<<temp.str << endl;
                     numbOfStacks++;                    
                 }
-                
-                
 
-                
             }
 
         }
@@ -298,24 +250,16 @@ int main()
         for (i = 0; i < numbOfStacks; i++){
             ss << i;
             indexStr = ss.str();
-            //cout << indexStr << endl;
             j += 1;
         }
-        
-        
-        
-        
-       // cout << "it MUST equal: " << in.one <<in.two << in.three << in.four << in.five << in.six << in.seven << in.eight << in.nine << endl;
-        
+
         string strAr[100];
         int strArSize;
-        bool endFlag = false;
-        
+        bool endFlag = false;      
         
         do {
             endFlag = false;
             for (i = 0; (unsigned)i  < indexStr.length() + 1; i++){
-
 
                 tempStr = indexStr.substr(0, i);
                 
@@ -325,8 +269,6 @@ int main()
                 for (k = 0; k < 100; k++){
                     strAr[k] = "";
                 }
-
-
                 //add to addUp stack
                 for (j = 0; j < tempStr.length() + 1; j++){
                     int indx = tempStr[j] - '0';
@@ -345,20 +287,10 @@ int main()
                     
                 }
                 
-                //cout << addUp.one <<addUp.two << addUp.three << addUp.four << addUp.five << addUp.six << addUp.seven << addUp.eight << addUp.nine << endl; 
-    
-                /*
-                cout << addUp.one <<addUp.two << addUp.three << addUp.four << addUp.five << addUp.six << addUp.seven << addUp.eight << addUp.nine << endl;
-                cout << "compare to" << endl;
-                cout << in.one <<in.two << in.three << in.four << in.five << in.six << in.seven << in.eight << in.nine << endl;
-                */
-                
                 if ((addUp.one == in.one) && (addUp.two == in.two) && (addUp.three == in.three) && 
                 (addUp.four == in.four) && (addUp.five == in.five) && (addUp.six == in.six) && 
                 (addUp.seven == in.seven) && (addUp.eight == in.eight) && (addUp.nine == in.nine)){
                     
-
-
                     cout << "It is stackable: ";
                     for (i = 0; i < strArSize; i++){
                         if (i != strArSize-1){
@@ -373,31 +305,10 @@ int main()
                 }
                     
             }
-               
-            /*       
-            if (endFlag = true) {
-                break;
-            }
-            */
             
         } while (next_permutation(indexStr.begin(), indexStr.end()));
         
-        /*
-        if (endFlag == true){
-            cout << "It is stackable: ";
-            for (i = 0; i < strArSize; i++){
-                cout << strAr[i] << ", ";    
-            }
-        } else {
-            failure();
-        }
-        */
         failure();
-        
-        
-        //cout << "indexStr: "<< indexStr << endl;
-        
-       // displayStackArray(stackArray, numbOfStacks);
 
     } else {
      
@@ -485,7 +396,7 @@ Stack setToZero(){
     
     return temp;
 }
-// s1 == in, s2 == temp
+
 Stack subtractStackVals(Stack s1, Stack s2){
     s1.one = s1.one - s2.one;
     s1.two = s1.two - s2.two;
