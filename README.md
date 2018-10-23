@@ -1,5 +1,5 @@
 # Packing-Stacks-of-Boxes
-[WIP]
+
 Reddit Daily Programmer Challenge #349 [Intermediate] Packing Stacks of Boxes
 
 Limitations:
