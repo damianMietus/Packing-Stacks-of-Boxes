@@ -31,7 +31,6 @@ void displayArray(int array[], int arraySize);
 void displayStackArray(Stack array[], int arraySize);
 void failure();
 Stack createStack (string str);
-Stack subtractStackVals(Stack s1, Stack s2);
 Stack setToZero();
 
 int main()
@@ -395,18 +394,4 @@ Stack setToZero(){
     temp.nine = 0;
     
     return temp;
-}
-
-Stack subtractStackVals(Stack s1, Stack s2){
-    s1.one = s1.one - s2.one;
-    s1.two = s1.two - s2.two;
-    s1.three = s1.three - s2.three;
-    s1.four = s1.four - s2.four;
-    s1.five = s1.five - s2.five;
-    s1.six = s1.six - s2.six;
-    s1.seven = s1.seven - s2.seven;
-    s1.eight = s1.eight - s2.eight;
-    s1.nine = s1.nine - s2.nine;
-    
-    return s1;
 }
